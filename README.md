@@ -1,6 +1,10 @@
 # Unconstrained Zeroth-Order Optimization Algorithms
 
-This repository provides reference implementations of unconstrained zeroth-order optimization algorithms using NumPy. These algorithms are designed to minimize an objective function `f(x)` given an initial parameter array `x0`.
+This repository provides short reference implementations of unconstrained zeroth-order optimization algorithms using NumPy. All algorithms follow a simple API:
+
+```py
+def algorithm(f, x0: np.ndarray, n_iter=100, ...):
+```
 
 ## Implemented Algorithms
 
