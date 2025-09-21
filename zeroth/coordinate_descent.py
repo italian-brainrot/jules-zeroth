@@ -1,5 +1,8 @@
 import numpy as np
 
+from zeroth.problem import Problem
+
+
 def coordinate_descent(f, x0, n_iter=100, step_size=0.1):
     """
     Performs unconstrained optimization using the Coordinate Descent algorithm.
@@ -43,3 +46,33 @@ def coordinate_descent(f, x0, n_iter=100, step_size=0.1):
                 x += step_negative
 
     return x
+
+
+class LinearSystem(Problem):
+    """
+    A real-world problem of solving a system of linear equations Ax = b.
+
+    This is framed as a minimization problem: minimize ||Ax - b||^2.
+    """
+    def __init__(self):
+        # Generate a synthetic linear system
+        np.random.seed(0)
+        self.A = np.random.rand(10, 5)
+        self.b = np.random.rand(10)
+
+        # Initial guess for x
+        x0 = np.zeros(5)
+        super().__init__(x0)
+
+    def f(self, x):
+        return np.linalg.norm(self.A @ x - self.b)**2
+
+
+def test_coordinate_descent_on_linear_system():
+    problem = LinearSystem()
+    solution = coordinate_descent(problem.f, problem.x0, n_iter=100, step_size=0.01)
+
+    # Check that the final objective function value is lower than the initial one
+    initial_residual = problem.f(problem.x0)
+    final_residual = problem.f(solution)
+    assert final_residual < initial_residual
