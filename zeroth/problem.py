@@ -3,7 +3,7 @@ import numpy as np
 def _get_bound(b: float | np.ndarray | None, x0: np.ndarray):
     if b is None:
         return None
-    return np.broadcast_to(b, x0)
+    return np.broadcast_to(b, x0.shape)
 
 class Problem:
     def __init__(self, x0: np.ndarray, lb: float | np.ndarray | None = None, ub: float | np.ndarray | None = None):
@@ -26,4 +26,4 @@ class Problem:
 
     def __call__(self, x):
         """The objective function to minimize."""
-        raise NotImplementedError
+        return self.f(x)
