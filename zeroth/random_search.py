@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error
 from zeroth.problem import Problem
 
 
-def random_search(f, x0, n_iter=1000, step_size=0.1):
+def random_search(f: Problem, x0, n_iter=1000, step_size=0.1):
     """
     Performs unconstrained optimization using the Random Search algorithm.
 
