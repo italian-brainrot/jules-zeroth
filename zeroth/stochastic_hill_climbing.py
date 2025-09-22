@@ -56,7 +56,7 @@ class BeamDesignProblem(Problem):
         self.bounds = [(0.01, 1.0), (0.01, 1.0)]
         super().__init__(x0, lb=[b[0] for b in self.bounds], ub=[b[1] for b in self.bounds])
 
-    def f(self, x):
+    def __call__(self, x):
         """
         Calculates the cross-sectional area of the beam, with a penalty
         for violating the stress constraint.
