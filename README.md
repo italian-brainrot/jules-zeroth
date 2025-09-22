@@ -9,5 +9,5 @@ The repository follows a simple consistent structure. To add an algorithm, we do
 
 For simplicity each .py file contains algorithm, problem and a test case.
 
-# Requirements
+### Requirements
 - `numpy`
