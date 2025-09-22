@@ -61,7 +61,7 @@ class HyperparameterTuning(Problem):
         self.bounds = [(0, 10), (0, 1)]
         super().__init__(x0)
 
-    def f(self, x):
+    def __call__(self, x):
         alpha, l1_ratio = x
         model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=0)
         model.fit(self.X, self.y)
