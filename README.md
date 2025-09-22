@@ -8,3 +8,6 @@ The repository follows a simple consistent structure. To add an algorithm, we do
 3. Add a test case that verifies the algorithm's implementation on the reference problem.
 
 For simplicity each .py file contains algorithm, problem and a test case.
+
+# Requirements
+- `numpy`
