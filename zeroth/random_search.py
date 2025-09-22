@@ -70,9 +70,9 @@ class HyperparameterTuning(Problem):
 
 def test_random_search_on_hyperparameter_tuning():
     problem = HyperparameterTuning()
-    best_params = random_search(problem.f, problem.x0, n_iter=100, step_size=0.1)
+    best_params = random_search(problem, problem.x0, n_iter=100, step_size=0.1)
 
     # Check that the final objective function value is lower than the initial one
-    initial_mse = problem.f(problem.x0)
-    final_mse = problem.f(best_params)
+    initial_mse = problem(problem.x0)
+    final_mse = problem(best_params)
     assert final_mse < initial_mse
