@@ -26,4 +26,4 @@ class Problem:
 
     def __call__(self, x):
         """The objective function to minimize."""
-        return self.f(x)
+        raise NotImplementedError(f"{self.__class__.__name__} needs to implement `__call__`")
