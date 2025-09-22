@@ -3,7 +3,7 @@ import numpy as np
 from zeroth.problem import Problem
 
 
-def coordinate_descent(f, x0, n_iter=100, step_size=0.1):
+def coordinate_descent(f: Problem, x0: np.ndarray, n_iter: int = 100, step_size: float = 0.1):
     """
     Performs unconstrained optimization using the Coordinate Descent algorithm.
 
