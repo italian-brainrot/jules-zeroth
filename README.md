@@ -1,6 +1,6 @@
 # Unconstrained Zeroth-Order Optimization Algorithms
 
-This repository provides short reference implementations of unconstrained zeroth-order optimization algorithms using NumPy.
+This repository provides short reference implementations of unconstrained or bound constrained zeroth-order optimization algorithms using NumPy.
 
 The repository follows a simple consistent structure. To add an algorithm, we do this:
 1. Create a clear and concise algorithm implementation following a simple API: `algorithm(f, x0, ...)`
