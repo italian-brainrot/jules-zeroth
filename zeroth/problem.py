@@ -24,6 +24,6 @@ class Problem:
         self.ub = _get_bound(ub, x0)
         """upper bounds array of same shape as x0"""
 
-    def __call__(self, x):
+    def __call__(self, x: np.ndarray):
         """The objective function to minimize."""
         raise NotImplementedError(f"{self.__class__.__name__} needs to implement `__call__`")
