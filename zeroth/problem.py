@@ -6,7 +6,7 @@ def _get_bound(b: float | np.ndarray | None, x0: np.ndarray):
     return np.broadcast_to(b, x0)
 
 class Problem:
-    def __init__(self, x0: np.ndarray, lb: float | np.ndarray | None, ub: float | np.ndarray | None):
+    def __init__(self, x0: np.ndarray, lb: float | np.ndarray | None = None, ub: float | np.ndarray | None = None):
 
         # verify the shape
         if x0.ndim != 1:
