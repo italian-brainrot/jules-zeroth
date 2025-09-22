@@ -64,7 +64,7 @@ class LinearSystem(Problem):
         x0 = np.zeros(5)
         super().__init__(x0)
 
-    def f(self, x):
+    def __call__(self, x):
         return np.linalg.norm(self.A @ x - self.b)**2
 
 
