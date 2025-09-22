@@ -24,6 +24,6 @@ class Problem:
         self.ub = _get_bound(ub, x0)
         """upper bounds array of same shape as x0"""
 
-    def f(self, x):
+    def __call__(self, x):
         """The objective function to minimize."""
         raise NotImplementedError
