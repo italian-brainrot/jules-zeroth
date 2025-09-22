@@ -70,9 +70,9 @@ class LinearSystem(Problem):
 
 def test_coordinate_descent_on_linear_system():
     problem = LinearSystem()
-    solution = coordinate_descent(problem.f, problem.x0, n_iter=100, step_size=0.01)
+    solution = coordinate_descent(problem, problem.x0, n_iter=100, step_size=0.01)
 
     # Check that the final objective function value is lower than the initial one
-    initial_residual = problem.f(problem.x0)
-    final_residual = problem.f(solution)
+    initial_residual = problem(problem.x0)
+    final_residual = problem(solution)
     assert final_residual < initial_residual
