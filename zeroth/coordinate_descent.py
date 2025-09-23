@@ -3,7 +3,7 @@ import numpy as np
 from zeroth.problem import Problem
 
 
-def coordinate_descent(f: Problem, x0: np.ndarray, n_iter: int = 100, step_size: float = 0.1):
+def coordinate_descent(f: Problem, n_iter: int = 100, step_size: float = 0.1):
     """
     Performs unconstrained optimization using the Coordinate Descent algorithm.
 
@@ -20,15 +20,14 @@ def coordinate_descent(f: Problem, x0: np.ndarray, n_iter: int = 100, step_size:
     Returns:
         np.ndarray: The best solution found.
     """
-    x = np.copy(x0)
-    n_dims = len(x)
+    x = f.x0.copy()
 
     for _ in range(n_iter):
         for i in range(n_dims):
             # Create vectors for positive and negative steps
-            step_positive = np.zeros(n_dims)
+            step_positive = np.zeros(f.ndim)
             step_positive[i] = step_size
-            step_negative = np.zeros(n_dims)
+            step_negative = np.zeros(f.ndim)
             step_negative[i] = -step_size
 
             # Evaluate function at current point and after taking steps
