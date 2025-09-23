@@ -4,7 +4,7 @@ This repository provides short reference implementations of unconstrained or bou
 
 The repository follows a simple consistent structure. To add an algorithm, we do this:
 
-1. Create a clear and concise algorithm implementation following a simple API: `algorithm(f: Problem, x0: np.ndarray, ...)`. If the problem is unbounded, algorithms assume a centered and reduced prior at the beginning of the optimization (i.e. 0 mean and unitary standard deviation). They are however able to find solutions far from this initial prior. Algorithms that support bounds assume them to be (-1, 1) for all variables.
+1. Create a clear and concise algorithm implementation following a simple API: `algorithm(f: Problem, x0: np.ndarray, ...)`. If the problem is unbounded, algorithms assume a centered and reduced prior at the beginning of the optimization (i.e. 0 mean and unitary standard deviation). Some algorithms arer able to find solutions far from this initial prior. Algorithms that support bounds assume them to be (-1, 1) for all variables.
 
 2. Find a small unique real-world problem that this algorithm has been used for in literature, and create a clear and concise implementation subclassing the `Problem` class. The `Problem` class takes care of scaling bounded problems to (-1, 1) range, while unbounded problems should be parameterized to have approximately centered and reduced prior.
 
