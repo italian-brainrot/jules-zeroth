@@ -15,4 +15,6 @@ For simplicity each .py file contains algorithm, problem and a test case. All al
 ## Requirements
 
 - `numpy`
+- `scipy`
 - `pytest` (to run tests)
+- `scikit-learn` (for hyper-parameter optimization problem)
