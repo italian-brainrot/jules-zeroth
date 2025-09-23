@@ -15,14 +15,17 @@ The repository follows a simple consistent structure. To add an algorithm, we do
 For simplicity each .py file contains algorithm, problem and a test case. All algorithms can be used on all problems, since they follow the same API.
 
 ## Algorithms and problems
-- CMA-ES / Rosenbrock
-- Coordinate descent / Linear system
-- Differential evolution / frequency-modulated (FM) sound wave matching
-- DIRECT / Lennard-Jones potential problem
-- Nelder-Mead / Welded Beam Design
-- Powell's method / Continuously stirred-tank reactor (CSTR) optimization
-- Random search / Elastic net hyperparameter tuning
-- Stochastic hill climbing / Beam design problem
+| Algorithm                | Problem                                               |
+| ------------------------ | ----------------------------------------------------- |
+| Random search            | Elastic Net hyperparameter tuning                     |
+| Stochastic hill climbing | Beam design problem                                   |
+| Coordinate descent       | Linear system                                         |
+| Differential evolution   | Frequency-modulated (FM) sound wave matching          |
+| CMA-ES                   | Rosenbrock                                            |
+| DIRECT                   | Lennard-Jones potential problem                       |
+| Nelder-Mead              | Welded Beam Design                                    |
+| Powell's method          | Continuously stirred-tank reactor (CSTR) optimization |
+
 
 ## Requirements
 
