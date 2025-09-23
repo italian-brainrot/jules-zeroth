@@ -12,8 +12,7 @@ def coordinate_descent(f: Problem, n_iter: int = 100, step_size: float = 0.1):
     the function with respect to a single coordinate, keeping the others fixed.
 
     Args:
-        f (function): The objective function to minimize.
-        x0 (np.ndarray): The initial guess for the parameters.
+        f (Problem): The objective function to minimize.
         n_iter (int): The number of iterations to perform over all coordinates.
         step_size (float): The size of the step to take in each coordinate direction.
 
