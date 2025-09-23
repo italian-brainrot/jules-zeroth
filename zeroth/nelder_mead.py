@@ -3,7 +3,7 @@ import numpy as np
 from zeroth.problem import Problem
 
 
-def nelder_mead(f: Problem, x0=None, max_iter=1000, alpha=1.0, gamma=2.0, rho=0.5, sigma=0.5):
+def nelder_mead(f: Problem, max_iter=1000, alpha=1.0, gamma=2.0, rho=0.5, sigma=0.5):
     """
     Minimizes a function using the Nelder-Mead algorithm.
 
@@ -23,8 +23,7 @@ def nelder_mead(f: Problem, x0=None, max_iter=1000, alpha=1.0, gamma=2.0, rho=0.
     Returns:
         np.ndarray: The best solution found.
     """
-    if x0 is None:
-        x0 = f.x0
+    x0 = f.x0
     n = len(x0)
 
     # Initialize simplex
