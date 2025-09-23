@@ -5,7 +5,7 @@ from scipy.integrate import solve_ivp, trapezoid
 from zeroth.problem import Problem
 
 
-def powell(f: Problem, x0: np.ndarray, n_iter: int = 10, tol: float = 1e-5):
+def powell(f: Problem, n_iter: int = 10, tol: float = 1e-5):
     """
     Performs unconstrained optimization using Powell's conjugate direction method.
 
@@ -18,8 +18,8 @@ def powell(f: Problem, x0: np.ndarray, n_iter: int = 10, tol: float = 1e-5):
     Returns:
         np.ndarray: The best solution found.
     """
-    n = len(x0)
-    x = np.copy(x0)
+    n = f.ndim
+    x = f.x0.copy()
     dirs = np.eye(n)
     fx = f(x)
 
