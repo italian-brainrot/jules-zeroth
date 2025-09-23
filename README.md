@@ -18,6 +18,7 @@ For simplicity each .py file contains algorithm, problem and a test case. All al
 - CMA-ES / Rosenbrock
 - Coordinate descent / Linear system
 - Differential evolution / frequency-modulated (FM) sound wave matching
+- DIRECT / Lennard-Jones potential problem
 - Nelder-Mead / Welded Beam Design
 - Powell's method / Continuously stirred-tank reactor (CSTR) optimization
 - Random search / Elastic net hyperparameter tuning
