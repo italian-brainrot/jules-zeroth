@@ -10,7 +10,18 @@ The repository follows a simple consistent structure. To add an algorithm, we do
 
 3. Add a test case that verifies the algorithm's implementation on the reference problem.
 
+4. Add algorithm and problem to "Algorithms and problems" section in this README.
+
 For simplicity each .py file contains algorithm, problem and a test case. All algorithms can be used on all problems, since they follow the same API.
+
+## Algorithms and problems
+- CMA-ES / Rosenbrock
+- Coordinate descent / Linear system
+- Differential evolution / frequency-modulated (FM) sound wave matching
+- Nelder-Mead / Welded Beam Design
+- Powell's method / Continuously stirred-tank reactor (CSTR) optimization
+- Random search / Elastic net hyperparameter tuning
+- Stochastic hill climbing / Beam design problem
 
 ## Requirements
 
