@@ -11,7 +11,6 @@ def powell(f: Problem, n_iter: int = 10, tol: float = 1e-5):
 
     Args:
         f (Problem): The objective function to minimize.
-        x0 (np.ndarray): The initial guess for the parameters.
         n_iter (int): The number of iterations to perform.
         tol (float): The tolerance for convergence.
 
