@@ -16,7 +16,6 @@ def cma_es(f: Problem, sigma=0.3, max_iter=100):
 
     Args:
         f (Problem): The objective function to minimize.
-        x0 (np.ndarray, optional): Initial guess. Defaults to problem's x0.
         sigma (float): Initial step-size.
         max_iter (int): The maximum number of generations.
 
