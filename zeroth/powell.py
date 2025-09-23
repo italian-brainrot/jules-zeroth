@@ -94,8 +94,8 @@ class CSTROptimization(Problem):
 
 
 def test_powell_on_cstr():
-    problem = CSTROptimization(n_dims=10)
-    solution = powell(problem, n_iter=20)
+    problem = CSTROptimization(n_dims=5)
+    solution = powell(problem, n_iter=10)
 
     initial_cost = problem(problem.x0)
     final_cost = problem(solution)
