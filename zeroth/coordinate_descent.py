@@ -22,7 +22,7 @@ def coordinate_descent(f: Problem, n_iter: int = 100, step_size: float = 0.1):
     x = f.x0.copy()
 
     for _ in range(n_iter):
-        for i in range(n_dims):
+        for i in range(f.ndim):
             # Create vectors for positive and negative steps
             step_positive = np.zeros(f.ndim)
             step_positive[i] = step_size
@@ -65,7 +65,7 @@ class LinearSystem(Problem):
 
 def test_coordinate_descent_on_linear_system():
     problem = LinearSystem()
-    solution = coordinate_descent(problem, problem.x0, n_iter=100, step_size=0.01)
+    solution = coordinate_descent(problem, n_iter=100, step_size=0.01)
 
     # Check that the final objective function value is lower than the initial one
     initial_residual = problem(problem.x0)
