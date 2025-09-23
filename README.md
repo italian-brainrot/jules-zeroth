@@ -11,3 +11,4 @@ For simplicity each .py file contains algorithm, problem and a test case. All al
 
 ### Requirements
 - `numpy`
+- `pytest` (to run tests)
