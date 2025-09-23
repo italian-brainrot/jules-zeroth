@@ -23,7 +23,7 @@ def stochastic_hill_climbing(f: Problem, n_iter=1000, step_size=0.1):
     best_fx = f(best_x)
 
     for _ in range(n_iter):
-        x = best_x + np.random.normal(scale=step_size, size=x0.shape)
+        x = best_x + np.random.normal(scale=step_size, size=f.ndim)
         fx = f(x)
 
         if fx < best_fx:
