@@ -13,7 +13,7 @@ def differential_evolution(f: Problem, pop_size=50, mutation_factor=0.8, crossov
     continuous variables.
 
     Args:
-        f (function): The objective function to minimize.
+        f (Problem): The objective function to minimize.
         pop_size (int): The number of individuals in the population.
         mutation_factor (float): The mutation factor (F).
         crossover_rate (float): The crossover rate (CR).
