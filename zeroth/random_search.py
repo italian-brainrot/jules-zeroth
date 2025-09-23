@@ -78,7 +78,7 @@ def test_random_search_on_hyperparameter_tuning():
         return
 
     problem = HyperparameterTuning()
-    solution = random_search(problem, problem.x0, n_iter=100)
+    solution = random_search(problem, n_iter=100)
 
     # Check that the final objective function value is lower than the initial one
     loss_x0 = problem(problem.x0)
