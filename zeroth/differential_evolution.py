@@ -74,14 +74,17 @@ class FMSoundWaveMatching(Problem):
         self.time = np.linspace(0, 0.1, 1000)
         self.target_wave = self._generate_wave(self.target_params)
 
-        super().__init__(x0 = np.random.uniform(low=[0,100,0,50], high=[2,400,10,200]))
+        self.mean = np.array([1, 250, 5, 125])
+        self.std = np.array([0.5, 75, 2.5, 37.5])
+        super().__init__(x0=np.random.normal(size=4))
 
     def _generate_wave(self, params):
         a, f_c, I, f_m = params
         return a * np.sin(2 * np.pi * f_c * self.time + I * np.sin(2 * np.pi * f_m * self.time))
 
     def evaluate(self, x):
-        generated_wave = self._generate_wave(x)
+        x_unscaled = x * self.std + self.mean
+        generated_wave = self._generate_wave(x_unscaled)
         return np.sum((generated_wave - self.target_wave)**2)
 
 
