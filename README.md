@@ -6,7 +6,7 @@ The repository follows a simple consistent structure. To add an algorithm, we do
 
 1. Create a clear and concise algorithm implementation following a simple API: `algorithm(f, x0, ...)`. Unbounded algorithms assume a centered and reduced prior at the beginning of the optimization (i.e. 0 mean and unitary standard deviation). They are however able to find solutions far from this initial prior. Bounded algorithms assume bounds to be (-1, 1) for all variables.
 
-2. Find small unique real-world problem that this algorithm has been used for in literature, and create a clear and concise implementation subclassing the `Problem` class. Unbounded problems should be rescaled to have approximately centered and reduced prior. The `Problem` class takes care of scaling bounded problems.
+2. Find a small unique real-world problem that this algorithm has been used for in literature, and create a clear and concise implementation subclassing the `Problem` class. Unbounded problems should be rescaled to have approximately centered and reduced prior. The `Problem` class takes care of scaling bounded problems.
 
 3. Add a test case that verifies the algorithm's implementation on the reference problem.
 
