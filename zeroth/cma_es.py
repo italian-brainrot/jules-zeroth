@@ -3,7 +3,7 @@ import numpy as np
 from zeroth.problem import Problem
 
 
-def cma_es(f: Problem, x0=None, sigma=0.3, max_iter=100):
+def cma_es(f: Problem, sigma=0.3, max_iter=100):
     """
     Covariance Matrix Adaptation Evolution Strategy (CMA-ES).
 
@@ -24,7 +24,7 @@ def cma_es(f: Problem, x0=None, sigma=0.3, max_iter=100):
         np.ndarray: The best solution found.
     """
     n = f.ndim
-    mean = f.x0 if x0 is None else x0.copy()
+    mean = f.x0
 
     # Strategy parameter setting: Selection
     lambd = 4 + int(3 * np.log(n))
