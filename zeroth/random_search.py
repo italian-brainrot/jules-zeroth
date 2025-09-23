@@ -13,7 +13,7 @@ else:
     mean_squared_error = None
 
 
-def random_search(f: Problem, x0, n_iter=100):
+def random_search(f: Problem, n_iter=100):
     """
     Performs hyperparameter optimization using the Random Search algorithm.
 
@@ -21,13 +21,12 @@ def random_search(f: Problem, x0, n_iter=100):
 
     Args:
         f (function): The objective function to minimize.
-        x0 (np.ndarray): The initial guess for the parameters.
         n_iter (int): The number of iterations to perform.
 
     Returns:
         np.ndarray: The best solution found.
     """
-    best_x = x0
+    best_x = f.x0
     best_fx = f(best_x)
 
     for _ in range(n_iter):
