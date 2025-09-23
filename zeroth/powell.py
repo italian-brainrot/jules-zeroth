@@ -59,48 +59,44 @@ class CSTROptimization(Problem):
     performance measure. The problem is from Example 6.4-3 of
     "Optimal Control Theory: An Introduction" by Donald E. Kirk.
 
-    The control input `u(t)` is a piecewise constant function with two steps.
+    The control input `u(t)` is a piecewise constant function.
     """
-    def __init__(self):
-        super().__init__(x0=np.array([0.0, 0.0]))
+    def __init__(self, n_dims=10):
+        super().__init__(x0=np.zeros(n_dims))
+        self.n_dims = n_dims
 
     def evaluate(self, x):
-        u1, u2 = x
+        total_time = 0.78
+        time_step = total_time / self.n_dims
+        y_current = np.array([0.5, 0.5])
+        total_J = 0.0
 
-        def cstr_dynamics_u1(t, y):
-            x1, x2 = y
-            u = u1
-            dx1_dt = -x1 + 0.5 * x2 + (1 - np.exp(0.5 * x1)) * u
-            dx2_dt = -x2 - (1 - np.exp(0.5 * x1)) * u
-            return [dx1_dt, dx2_dt]
+        for i in range(self.n_dims):
+            u_current = x[i]
+            t_start = i * time_step
+            t_end = (i + 1) * time_step
+            t_span = [t_start, t_end]
 
-        def cstr_dynamics_u2(t, y):
-            x1, x2 = y
-            u = u2
-            dx1_dt = -x1 + 0.5 * x2 + (1 - np.exp(0.5 * x1)) * u
-            dx2_dt = -x2 - (1 - np.exp(0.5 * x1)) * u
-            return [dx1_dt, dx2_dt]
+            def cstr_dynamics(t, y):
+                x1, x2 = y
+                dx1_dt = -x1 + 0.5 * x2 + (1 - np.exp(0.5 * x1)) * u_current
+                dx2_dt = -x2 - (1 - np.exp(0.5 * x1)) * u_current
+                return [dx1_dt, dx2_dt]
 
-        t_span1 = [0, 0.39]
-        y0 = [0.5, 0.5]
-        sol1 = solve_ivp(cstr_dynamics_u1, t_span1, y0)
+            sol = solve_ivp(cstr_dynamics, t_span, y_current)
 
-        y1_end = sol1.y[:, -1]
-        t_span2 = [0.39, 0.78]
-        sol2 = solve_ivp(cstr_dynamics_u2, t_span2, y1_end)
+            y_current = sol.y[:, -1]
 
-        integrand1 = sol1.y[0]**2 + sol1.y[1]**2 + 0.1 * u1**2
-        J1 = trapezoid(integrand1, sol1.t)
+            integrand = sol.y[0]**2 + sol.y[1]**2 + 0.1 * u_current**2
+            J_i = trapezoid(integrand, sol.t)
+            total_J += J_i
 
-        integrand2 = sol2.y[0]**2 + sol2.y[1]**2 + 0.1 * u2**2
-        J2 = trapezoid(integrand2, sol2.t)
-
-        return J1 + J2
+        return total_J
 
 
 def test_powell_on_cstr():
-    problem = CSTROptimization()
-    solution = powell(problem, problem.x0)
+    problem = CSTROptimization(n_dims=10)
+    solution = powell(problem, problem.x0, n_iter=20) # Increased iterations for higher dim
 
     initial_cost = problem(problem.x0)
     final_cost = problem(solution)
