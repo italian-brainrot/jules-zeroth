@@ -1,44 +1,46 @@
+from importlib.util import find_spec
+
 import numpy as np
-from sklearn.linear_model import ElasticNet
-from sklearn.metrics import mean_squared_error
 
 from zeroth.problem import Problem
 
+if find_spec('sklearn') is not None:
+    from sklearn.linear_model import ElasticNet
+    from sklearn.metrics import mean_squared_error
+
+else:
+    ElasticNet = None
+    mean_squared_error = None
 
 
-
-def random_search(f: Problem, x0, n_iter=100, bounds=None):
+def random_search(f: Problem, x0, n_iter=100):
     """
     Performs hyperparameter optimization using the Random Search algorithm.
 
-    This algorithm explores the search space by generating random points
-    from a uniform distribution if bounds are specified, or from a normal
-    distribution if bounds are not specified.
+    This algorithm explores the search space by generating random points within the search domain.
 
     Args:
         f (function): The objective function to minimize.
         x0 (np.ndarray): The initial guess for the parameters.
         n_iter (int): The number of iterations to perform.
-        bounds (list of tuples, optional): A list of (min, max) bounds
-            for each parameter.
 
     Returns:
-        np.ndarray: The parameters that minimize the objective function.
+        np.ndarray: The best solution found.
     """
     best_x = x0
     best_fx = f(best_x)
 
     for _ in range(n_iter):
-        if bounds:
-            candidate_x = np.array([np.random.uniform(low, high) for low, high in bounds])
+        if f.bounded:
+            x = np.random.uniform(-1, 1, f.ndim)
         else:
-            candidate_x = x0 + np.random.randn(len(x0))
+            x = np.random.randn(f.ndim)
 
-        candidate_fx = f(candidate_x)
+        fx = f(x)
 
-        if candidate_fx < best_fx:
-            best_x = candidate_x
-            best_fx = candidate_fx
+        if fx < best_fx:
+            best_x = x
+            best_fx = fx
 
     return best_x
 
@@ -58,10 +60,12 @@ class HyperparameterTuning(Problem):
 
         # Initial guess for alpha and l1_ratio
         x0 = np.array([0.5, 0.5])
-        self.bounds = [(0, 10), (0, 1)]
-        super().__init__(x0)
+        super().__init__(x0, lb=(0,0), ub=(10,1))
 
-    def __call__(self, x):
+    def evaluate(self, x):
+        if ElasticNet is None or mean_squared_error is None:
+            raise ModuleNotFoundError("sklearn is not installed")
+
         alpha, l1_ratio = x
         model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=0)
         model.fit(self.X, self.y)
@@ -70,10 +74,14 @@ class HyperparameterTuning(Problem):
 
 
 def test_random_search_on_hyperparameter_tuning():
+    # skip if sklearn is not installed
+    if ElasticNet is None:
+        return
+
     problem = HyperparameterTuning()
-    best_params = random_search(problem, problem.x0, n_iter=100, bounds=problem.bounds)
+    solution = random_search(problem, problem.x0, n_iter=100)
 
     # Check that the final objective function value is lower than the initial one
-    initial_mse = problem(problem.x0)
-    final_mse = problem(best_params)
-    assert final_mse < initial_mse
+    loss_x0 = problem(problem.x0)
+    loss_sol = problem(solution)
+    assert loss_sol < loss_x0

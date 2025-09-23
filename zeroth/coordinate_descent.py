@@ -11,9 +11,6 @@ def coordinate_descent(f: Problem, x0: np.ndarray, n_iter: int = 100, step_size:
     minimization along coordinate directions. At each iteration, it minimizes
     the function with respect to a single coordinate, keeping the others fixed.
 
-    A real-world example of its use is in solving large-scale linear regression
-    problems (e.g., Lasso) where the number of features is very large.
-
     Args:
         f (function): The objective function to minimize.
         x0 (np.ndarray): The initial guess for the parameters.
@@ -21,7 +18,7 @@ def coordinate_descent(f: Problem, x0: np.ndarray, n_iter: int = 100, step_size:
         step_size (float): The size of the step to take in each coordinate direction.
 
     Returns:
-        np.ndarray: The parameters that minimize the objective function.
+        np.ndarray: The best solution found.
     """
     x = np.copy(x0)
     n_dims = len(x)
@@ -64,7 +61,7 @@ class LinearSystem(Problem):
         x0 = np.zeros(5)
         super().__init__(x0)
 
-    def __call__(self, x):
+    def evaluate(self, x):
         return np.linalg.norm(self.A @ x - self.b)**2
 
 

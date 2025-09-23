@@ -3,7 +3,7 @@ import numpy as np
 from zeroth.problem import Problem
 
 
-def stochastic_hill_climbing(f: Problem, x0, n_iter=1000, step_size=0.1, neighbor=None):
+def stochastic_hill_climbing(f: Problem, x0, n_iter=1000, step_size=0.1):
     """
     Performs unconstrained optimization using the Stochastic Hill Climbing algorithm.
 
@@ -16,25 +16,20 @@ def stochastic_hill_climbing(f: Problem, x0, n_iter=1000, step_size=0.1, neighbo
         x0 (np.ndarray): The initial guess for the parameters.
         n_iter (int): The number of iterations to perform.
         step_size (float): The standard deviation of the random steps.
-        neighbor (function, optional): A function that takes a solution
-            and returns a random neighbor. If None, a random step is taken.
 
     Returns:
-        np.ndarray: The parameters that minimize the objective function.
+        np.ndarray: The best solution found.
     """
     best_x = x0
     best_fx = f(best_x)
 
     for _ in range(n_iter):
-        if neighbor:
-            candidate_x = neighbor(best_x)
-        else:
-            candidate_x = best_x + np.random.normal(scale=step_size, size=x0.shape)
-        candidate_fx = f(candidate_x)
+        x = best_x + np.random.normal(scale=step_size, size=x0.shape)
+        fx = f(x)
 
-        if candidate_fx < best_fx:
-            best_x = candidate_x
-            best_fx = candidate_fx
+        if fx < best_fx:
+            best_x = x
+            best_fx = fx
 
     return best_x
 
@@ -44,19 +39,18 @@ class BeamDesignProblem(Problem):
     A real-world problem of designing a beam to minimize its weight while
     satisfying stress constraints.
     """
-    def __init__(self):
+    def __init__(self, L=2.0, P=5000, S=250e6):
         # Problem constants
-        self.L = 2.0  # meters
-        self.P = 5000  # Newtons
-        self.S = 250e6  # Pascals (yield strength of steel)
+        self.L = L  # meters
+        self.P = P  # Newtons
+        self.S = S  # Pascals (yield strength of steel)
         self.M = (self.P * self.L) / 4  # Maximum bending moment
 
         # Initial guess for width and height (w, h)
         x0 = np.array([0.1, 0.1])
-        self.bounds = [(0.01, 1.0), (0.01, 1.0)]
-        super().__init__(x0, lb=[b[0] for b in self.bounds], ub=[b[1] for b in self.bounds])
+        super().__init__(x0, lb=0.01, ub=1)
 
-    def __call__(self, x):
+    def evaluate(self, x):
         """
         Calculates the cross-sectional area of the beam, with a penalty
         for violating the stress constraint.
