@@ -13,7 +13,6 @@ def nelder_mead(f: Problem, max_iter=1000, alpha=1.0, gamma=2.0, rho=0.5, sigma=
 
     Args:
         f (Problem): The objective function to minimize.
-        x0 (np.ndarray, optional): Initial guess. Defaults to problem's x0.
         max_iter (int): The maximum number of iterations.
         alpha (float): The reflection coefficient.
         gamma (float): The expansion coefficient.
@@ -24,7 +23,7 @@ def nelder_mead(f: Problem, max_iter=1000, alpha=1.0, gamma=2.0, rho=0.5, sigma=
         np.ndarray: The best solution found.
     """
     x0 = f.x0
-    n = len(x0)
+    n = f.ndim
 
     # Initialize simplex
     simplex = [x0]
