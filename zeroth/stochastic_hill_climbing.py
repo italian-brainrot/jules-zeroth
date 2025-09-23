@@ -3,7 +3,7 @@ import numpy as np
 from zeroth.problem import Problem
 
 
-def stochastic_hill_climbing(f: Problem, x0, n_iter=1000, step_size=0.1):
+def stochastic_hill_climbing(f: Problem, n_iter=1000, step_size=0.1):
     """
     Performs unconstrained optimization using the Stochastic Hill Climbing algorithm.
 
@@ -12,15 +12,14 @@ def stochastic_hill_climbing(f: Problem, x0, n_iter=1000, step_size=0.1):
     function value, it becomes the new best point.
 
     Args:
-        f (function): The objective function to minimize.
-        x0 (np.ndarray): The initial guess for the parameters.
+        f (Problem): The objective function to minimize.
         n_iter (int): The number of iterations to perform.
         step_size (float): The standard deviation of the random steps.
 
     Returns:
         np.ndarray: The best solution found.
     """
-    best_x = x0
+    best_x = f.x0
     best_fx = f(best_x)
 
     for _ in range(n_iter):
