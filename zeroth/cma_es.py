@@ -111,7 +111,7 @@ def test_cma_es_on_rosenbrock():
     initial_cost = problem(problem.x0)
 
     # Run the cma_es algorithm
-    solution = cma_es(problem, max_iter=200) # Increased iterations for this difficult problem
+    solution = cma_es(problem, max_iter=200)
 
     # Check that the found solution is better than the random one
     final_cost = problem(solution)
