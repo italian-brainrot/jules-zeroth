@@ -7,7 +7,7 @@ The repository follows a simple consistent structure. To add an algorithm, we do
 2. Find small unique real-world problem that this algorithm has been used for in literature, and create a clear and concise implementation subclassing the `Problem` class.
 3. Add a test case that verifies the algorithm's implementation on the reference problem.
 
-For simplicity each .py file contains algorithm, problem and a test case.
+For simplicity each .py file contains algorithm, problem and a test case. All algorithms can be used on all problems, since they follow the same API.
 
 ### Requirements
 - `numpy`
