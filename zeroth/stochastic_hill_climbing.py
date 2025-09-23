@@ -72,7 +72,7 @@ class BeamDesignProblem(Problem):
 
 def test_stochastic_hill_climbing_on_beam_design():
     problem = BeamDesignProblem()
-    best_params = stochastic_hill_climbing(problem, problem.x0, n_iter=1000, step_size=0.01)
+    best_params = stochastic_hill_climbing(problem, n_iter=1000, step_size=0.01)
 
     initial_obj = problem(problem.x0)
     final_obj = problem(best_params)
