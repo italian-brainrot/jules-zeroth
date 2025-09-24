@@ -141,7 +141,7 @@ class LennardJonesPotential(Problem):
         The input x is a flattened array of 2D coordinates, e.g., [x1, y1, x2, y2, ...].
         """
         # Reshape the flat vector into a (n_atoms, 2) array of coordinates
-        coords = x.reshape((self.n_atoms, 2)) / 2
+        coords = x.reshape((self.n_atoms, 2)) * 2
 
         total_energy = 0.0
         for i in range(self.n_atoms):
