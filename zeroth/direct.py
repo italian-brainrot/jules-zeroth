@@ -133,7 +133,8 @@ class LennardJonesPotential(Problem):
         x0 = np.random.rand(ndim) * 2 - 1
 
         # Atoms are constrained to a box
-        super().__init__(x0)
+        bounds = np.array([[-10, 10]] * len(x0))
+        super().__init__(x0, lb=bounds[:, 0], ub=bounds[:, 1])
 
     def evaluate(self, x):
         """

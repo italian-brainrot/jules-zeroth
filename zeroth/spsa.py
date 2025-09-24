@@ -68,7 +68,7 @@ class SignalDenoising(Problem):
         # Initial guess for the filter coefficients
         x0 = np.array([0.33, 0.33, 0.33]) # a simple averaging filter
         # The problem class will scale this to (-1,1)
-        super().__init__(x0))
+        super().__init__(x0)
 
     def evaluate(self, x):
         # x contains the 3 FIR filter coefficients
