@@ -31,11 +31,6 @@ def spsa(f: Problem, n_iter=1000, a=0.01, c=0.01, A=100, alpha=0.602, gamma=0.10
         x_plus = x + ck * delta
         x_minus = x - ck * delta
 
-        # Scale the inputs if the problem is bounded
-        if f.bounded:
-            x_plus = np.clip(x_plus, -1, 1)
-            x_minus = np.clip(x_minus, -1, 1)
-
         y_plus = f(x_plus)
         y_minus = f(x_minus)
 
@@ -73,7 +68,7 @@ class SignalDenoising(Problem):
         # Initial guess for the filter coefficients
         x0 = np.array([0.33, 0.33, 0.33]) # a simple averaging filter
         # The problem class will scale this to (-1,1)
-        super().__init__(x0, lb=np.array([-2, -2, -2]), ub=np.array([2, 2, 2]))
+        super().__init__(x0))
 
     def evaluate(self, x):
         # x contains the 3 FIR filter coefficients
