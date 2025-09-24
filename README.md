@@ -28,6 +28,7 @@ For simplicity each .py file contains algorithm, problem and a test case. All al
 | Simulated annealing      | Uncapacitated Facility Location Problem               |
 | Bayesian optimization    | SVM hyperparameter tuning                             |
 | SPSA                     | Signal Denoising                                      |
+| 2-SPSA                   | Multicollinearity in linear regression                |
 
 
 ## Requirements
