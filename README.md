@@ -26,6 +26,7 @@ For simplicity each .py file contains algorithm, problem and a test case. All al
 | Nelder-Mead              | Welded Beam Design                                    |
 | Powell's method          | Continuously stirred-tank reactor (CSTR) optimization |
 | Simulated annealing      | Uncapacitated Facility Location Problem               |
+| Bayesian optimization    | SVM hyperparameter tuning                             |
 
 
 ## Requirements
