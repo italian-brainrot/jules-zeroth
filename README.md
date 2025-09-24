@@ -27,6 +27,7 @@ For simplicity each .py file contains algorithm, problem and a test case. All al
 | Powell's method          | Continuously stirred-tank reactor (CSTR) optimization |
 | Simulated annealing      | Uncapacitated Facility Location Problem               |
 | Bayesian optimization    | SVM hyperparameter tuning                             |
+| SPSA                     | Signal Denoising                                      |
 
 
 ## Requirements
